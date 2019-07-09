@@ -3,7 +3,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<div class="container">
 <title>BOARD MODIFY FORM</title>
 </head>
 <body>
@@ -46,19 +59,21 @@
         }
 %>    
         <form action="<%=request.getContextPath()%>/jsp_board/boardModifyAction.jsp" method="post">
-            <div>boardNo</div>
+            <div><h5>boardNo</h5></div>
             <div><input name="boardNo" value="<%=boardNo%>" type="text" readonly="readonly"/></div>
-            <div>비밀번호확인: </div>
+            <div><h5>비밀번호확인: </h5></div>
             <div><input name="boardPw" id="boardPw" type="password"/></div>
-            <div>boardTitle : </div>
+            <div><h5>boardTitle : </h5></div>
             <div><input name="boardTitle" value="<%=boardTitle%>" id="boardTitle" type="text"/></div>
-            <div>boardContent : </div>
+            <div><h5>boardContent : </h5></div>
             <div><textarea name="boardContent" id="boardContent" rows="5" cols="50"><%=boardContent%></textarea></div>
             <div>
-                <input type="submit" value="글수정"/>
-                <input type="reset" value="초기화"/>
+                <input type="submit" value="글수정"  class="btn btn-primary"/>
+                <input type="reset" value="초기화"  class="btn btn-primary"/>
+                <a href="<%=request.getContextPath()%>/jsp_board/boardList.jsp?" class="btn btn-primary">취소</a>
             </div>
         </form>
+</div>
 <%
     }    
 %>

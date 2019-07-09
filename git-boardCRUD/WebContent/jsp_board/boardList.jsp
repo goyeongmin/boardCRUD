@@ -3,6 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>BOARD LIST</title>
 </head>
@@ -37,7 +50,7 @@
             totalRowCount = totalResultSet.getInt(1);
         }
 %>
-    <div>전체행의 수 : <%=totalRowCount%></div>
+    <div class="d-flex text-white"><h6 class="p-2 bg-primary">게시글 목록 : <%=totalRowCount%>개</h6></div>
 <%    
     int pagePerRow = 10; // 페이지당 보여줄 글의 목록을 10개로 설정
     String listSql = "SELECT board_no, board_title, board_user, board_date FROM board ORDER BY board_no DESC LIMIT ?, ?";
@@ -46,7 +59,8 @@
     listStatement.setInt(2, pagePerRow); 
     listResultSet = listStatement.executeQuery();
 %>
-    <table border="1">
+	<div class="container">
+    <table class="table">
         <thead>
             <tr>
                 <th>boardTitle</th>
@@ -54,11 +68,12 @@
                 <th>boardDate</th>
             </tr>
         </thead>
+ 		
         <tbody>
 <%
             while(listResultSet.next()) {
-%>
-                <tr>
+%>	
+                <tr class="table-light">
                     <td><a href="<%=request.getContextPath()%>/jsp_board/boardView.jsp?boardNo=<%=listResultSet.getInt("board_no")%>"><%=listResultSet.getString("board_title")%></a></td>
                     <td><%=listResultSet.getString("board_user")%></td>
                     <td><%=listResultSet.getString("board_date")%></td>
@@ -67,10 +82,11 @@
             }
 %>
         </tbody>
+        
     </table>
-    <div>
-        <a href="<%=request.getContextPath()%>/jsp_board/boardAddForm.jsp">게시글 입력</a>
-    </div>
+    <a href="<%=request.getContextPath()%>/jsp_board/boardAddForm.jsp" class="btn btn-primary">게시글 입력</a><br><br>
+    
+   
 <%
     // 마지막 페이지는 전체글의수를 pagePerRow로 나누었을때 나누어 떨어지면 몫이 마지막 페이지 
     // ex) 전체글이 50개 / 10개씩 -> 마지막 페이지는 5페이지
@@ -81,20 +97,20 @@
         lastPage++;
     }
 %>
-    <div>
+    
 <%
         if(currentPage>1) { // 현재 페이지가 1페이지보다 크면 이전페이지 링크를 추가
 %>
-            <a href="<%=request.getContextPath()%>/jsp_board/boardList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+            <a href="<%=request.getContextPath()%>/jsp_board/boardList.jsp?currentPage=<%=currentPage-1%>" class="btn btn-light">이전</a>
 <%
         }
         if(currentPage < lastPage) { // 현재 페이지가 마지막 페이지보다 작으면 다음페이지 링크를 추가
 %>
-            <a href="<%=request.getContextPath()%>/jsp_board/boardList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+            <a href="<%=request.getContextPath()%>/jsp_board/boardList.jsp?currentPage=<%=currentPage+1%>" class="btn btn-light">다음</a>
 <%
         }
 %>
-    </div>
+    
 <%
     } catch(Exception e) {
         e.printStackTrace();
@@ -107,6 +123,7 @@
         try {connection.close();} catch(Exception e){}
     }
 %>
+</div>
 </body>
 </html>
 
