@@ -63,6 +63,7 @@
     <table class="table">
         <thead>
             <tr>
+            	<th>boardNo</th>
                 <th>boardTitle</th>
                 <th>boardUser</th>
                 <th>boardDate</th>
@@ -74,6 +75,7 @@
             while(listResultSet.next()) {
 %>	
                 <tr class="table-light">
+                	<td><%=listResultSet.getInt("board_no")%></td>
                     <td><a href="<%=request.getContextPath()%>/jsp_board/boardView.jsp?boardNo=<%=listResultSet.getInt("board_no")%>"><%=listResultSet.getString("board_title")%></a></td>
                     <td><%=listResultSet.getString("board_user")%></td>
                     <td><%=listResultSet.getString("board_date")%></td>
